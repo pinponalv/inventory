@@ -1,11 +1,14 @@
 package com.pinpon.inventory.management.user.entity;
 
+import com.pinpon.inventory.management.inventoryMovement.entity.InventoryMovement;
 import com.pinpon.inventory.management.user.entity.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 
 @Entity
@@ -28,4 +31,7 @@ public class User {
     private String password;
     @Column(nullable = false)
     private Role role;
+
+    @OneToMany (mappedBy = "user")
+    private List<InventoryMovement> inventoryMovements;
 }

@@ -1,7 +1,4 @@
 package com.pinpon.inventory.management.inventory.dto;
-
-import com.pinpon.inventory.management.product.entity.Product;
-import com.pinpon.inventory.management.warehouse.entity.Warehouse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,9 +8,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ResponseDTO {
+public class ResponseInventoryDTO {
     private Long id;
-    private Product product;
-    private Warehouse warehouse;
+    private Long productId;
+    private String productName;
+    private Long warehouseId;
+    private String warehouseName;
     private int stock;
 }

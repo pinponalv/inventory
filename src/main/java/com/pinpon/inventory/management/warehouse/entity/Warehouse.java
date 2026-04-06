@@ -1,10 +1,14 @@
 package com.pinpon.inventory.management.warehouse.entity;
 
+import com.pinpon.inventory.management.inventory.entity.Inventory;
+import com.pinpon.inventory.management.inventoryMovement.entity.InventoryMovement;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -22,4 +26,12 @@ public class Warehouse {
 
     @Column(unique = true, nullable = false)
     private String address;
+
+    @OneToMany (mappedBy = "warehouses")
+    private List<Inventory> inventory;
+
+    @OneToMany (mappedBy = "warehouse")
+    private List<InventoryMovement> inventoryMovement;
+
+    
 }
