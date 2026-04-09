@@ -114,4 +114,31 @@ public class InventoryService implements IInventoryService {
     public void deleteInventory(Long id) {
         inventoryRepository.deleteById(id);
     }
+
+    @Override
+    public ResponseInventoryDTO findByProductName(String productName) {
+        Inventory inventory = inventoryRepository.findByProductName(productName).orElseThrow(() -> new RuntimeException("inventory not found"));
+        return new  ResponseInventoryDTO(
+                inventory.getId(),
+                inventory.getProduct().getId(),
+                inventory.getProduct().getName(),
+                inventory.getWarehouse().getId(),
+                inventory.getWarehouse().getName(),
+                inventory.getStock()
+        );
+    }
+
+    @Override
+    public ResponseInventoryDTO findByWarehouseName(String warehouseName) {
+        Inventory inventory = inventoryRepository.findByWarehouseName(warehouseName).orElseThrow(() -> new RuntimeException("inventory not found"));
+
+        return new   ResponseInventoryDTO(
+                inventory.getId(),
+                inventory.getProduct().getId(),
+                inventory.getProduct().getName(),
+                inventory.getWarehouse().getId(),
+                inventory.getWarehouse().getName(),
+                inventory.getStock()
+        );
+    }
 }

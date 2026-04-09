@@ -3,7 +3,6 @@ package com.pinpon.inventory.management.user.controller;
 import com.pinpon.inventory.management.user.dto.CreateUserRequestDTO;
 import com.pinpon.inventory.management.user.dto.UpdatedUserRequestDTO;
 import com.pinpon.inventory.management.user.dto.UserResponseDTO;
-import com.pinpon.inventory.management.user.entity.User;
 import com.pinpon.inventory.management.user.service.IUserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -36,6 +35,18 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long id) {
         UserResponseDTO userResponseDTO = userService.getUserById(id);
+        return ResponseEntity.ok(userResponseDTO);
+    }
+
+    @GetMapping("/{name}")
+    public ResponseEntity<UserResponseDTO> getUserByName(@PathVariable String name) {
+        UserResponseDTO user = userService.findByName(name);
+        return  ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/{email}")
+    public ResponseEntity<UserResponseDTO> getUserByEmail(@PathVariable String email) {
+        UserResponseDTO userResponseDTO = userService.findByEmail(email);
         return ResponseEntity.ok(userResponseDTO);
     }
 

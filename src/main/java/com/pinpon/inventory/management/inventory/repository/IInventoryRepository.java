@@ -9,6 +9,6 @@ import java.util.Optional;
 @Repository
 public interface IInventoryRepository extends JpaRepository<Inventory, Long> {
     Optional<Inventory> findByProductIdAndWarehouseId(Long productId, Long warehouseId);
-
-    //TODO: AGREGAR EL BUSCAR POR PRODUCTO Y ALMACEN
+    Optional<Inventory> findByProductName(String productName);
+    Optional<Inventory> findByWarehouseName(String warehouseName);
 }

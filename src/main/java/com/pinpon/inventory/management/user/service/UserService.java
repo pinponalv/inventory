@@ -89,4 +89,34 @@ public class UserService implements IUserService {
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+
+    @Override
+    public UserResponseDTO findByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        if(user == null){
+            throw  new RuntimeException("Email not found");
+        }
+        return new   UserResponseDTO(
+                user.getId(),
+                user.getName(),
+                user.getLastName(),
+                user.getEmail(),
+                user.getRole()
+        );
+    }
+
+    @Override
+    public UserResponseDTO findByName(String name) {
+        User user  = userRepository.findByName(name);
+        if(user == null){
+            throw  new RuntimeException("User not found");
+        }
+        return new    UserResponseDTO(
+                user.getId(),
+                user.getName(),
+                user.getLastName(),
+                user.getEmail(),
+                user.getRole()
+        );
+    }
 }

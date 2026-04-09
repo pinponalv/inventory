@@ -7,14 +7,11 @@ import com.pinpon.inventory.management.user.dto.UserResponseDTO;
 import java.util.List;
 
 public interface IUserService {
-    //create
     UserResponseDTO createUser(CreateUserRequestDTO requestDTO);
-    //get
     List<UserResponseDTO> getAllUsers();
-    //get id
     UserResponseDTO getUserById(Long id);
-    //update
     UserResponseDTO updateUser(Long id, UpdatedUserRequestDTO requestDTO);
-    //delete
     void deleteUser(Long id);
+    UserResponseDTO findByEmail(String email);
+    UserResponseDTO findByName(String name);
 }
