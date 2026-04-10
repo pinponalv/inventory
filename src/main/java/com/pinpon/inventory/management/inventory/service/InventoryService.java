@@ -116,6 +116,20 @@ public class InventoryService implements IInventoryService {
     }
 
     @Override
+    public ResponseInventoryDTO findByProductIdAndWarehouseId(Long productId, Long warehouseId) {
+        Inventory inventory = inventoryRepository.findByProductIdAndWarehouseId(productId, warehouseId)
+                .orElseThrow(( ) -> new RuntimeException("inventory not found"));
+        return new  ResponseInventoryDTO(
+                inventory.getId(),
+                inventory.getProduct().getId(),
+                inventory.getProduct().getName(),
+                inventory.getWarehouse().getId(),
+                inventory.getWarehouse().getName(),
+                inventory.getStock()
+        );
+    }
+
+    @Override
     public ResponseInventoryDTO findByProductName(String productName) {
         Inventory inventory = inventoryRepository.findByProductName(productName).orElseThrow(() -> new RuntimeException("inventory not found"));
         return new  ResponseInventoryDTO(

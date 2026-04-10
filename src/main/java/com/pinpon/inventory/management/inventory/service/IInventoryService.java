@@ -12,7 +12,7 @@ public interface IInventoryService {
     ResponseInventoryDTO findById(Long id);
     ResponseInventoryDTO updateInventory(Long id, UpdateInventoryRequestDTO requestDTO);
     void deleteInventory(Long id);
-
+    ResponseInventoryDTO findByProductIdAndWarehouseId(Long productId, Long warehouseId);
     ResponseInventoryDTO findByProductName(String productName);
     ResponseInventoryDTO findByWarehouseName(String warehouseName);
 }

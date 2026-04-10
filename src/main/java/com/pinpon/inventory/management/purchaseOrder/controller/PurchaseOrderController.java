@@ -2,6 +2,7 @@ package com.pinpon.inventory.management.purchaseOrder.controller;
 
 import com.pinpon.inventory.management.purchaseOrder.dto.purchaseOrder.CreateDTO;
 import com.pinpon.inventory.management.purchaseOrder.dto.purchaseOrder.ResponseDTO;
+import com.pinpon.inventory.management.purchaseOrder.dto.purchaseOrder.UpdateDTO;
 import com.pinpon.inventory.management.purchaseOrder.service.IPurchaseOrderService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,4 +35,21 @@ public class PurchaseOrderController {
 
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ResponseDTO> getPurchaseOrderById(@PathVariable Long id){
+        ResponseDTO response = purchaseOrderService.getPurchaseOrderById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<ResponseDTO> updatePurchaseOrder(@PathVariable Long id, @RequestBody UpdateDTO updateDTO){
+        ResponseDTO response = purchaseOrderService.updatePurchaseOrder(id, updateDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ResponseDTO> deletePurchaseOrder(@PathVariable Long id){
+        purchaseOrderService.deletePurchaseOrder(id);
+        return ResponseEntity.noContent().build();
+    }
 }
