@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 
@@ -36,6 +37,7 @@ public class InventoryMovement {
     private User user;
     private Supplier supplier;
     private int quantity;
+    @CreationTimestamp
     private Date creationDate;
     private TypeMovement typeMovement;
 

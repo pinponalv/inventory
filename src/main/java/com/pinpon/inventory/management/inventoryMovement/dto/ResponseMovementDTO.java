@@ -1,8 +1,6 @@
 package com.pinpon.inventory.management.inventoryMovement.dto;
 
-import com.pinpon.inventory.management.product.entity.Product;
-import com.pinpon.inventory.management.user.entity.User;
-import com.pinpon.inventory.management.warehouse.entity.Warehouse;
+import com.pinpon.inventory.management.inventoryMovement.entity.enums.TypeMovement;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,9 +13,11 @@ import java.util.Date;
 @Getter
 @Setter
 public class ResponseMovementDTO {
-    private Product product;
-    private Warehouse warehouse;
-    private User user;
+    private Long productId;
+    private Long warehouseId;
+    private Long userId;
+    private Long supplierId;
     private int quantity;
     private Date creationDate;
+    private TypeMovement typeMovement;
 }

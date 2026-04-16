@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CreateMovementDTO {
+public class UpdateMovementDTO {
     private Long productId;
     private Long warehouseId;
     private Long userId;
