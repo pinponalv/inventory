@@ -13,8 +13,10 @@ import com.pinpon.inventory.management.supplier.repository.ISupplierRepository;
 import com.pinpon.inventory.management.warehouse.entity.Warehouse;
 import com.pinpon.inventory.management.warehouse.repository.IWarehouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -41,7 +43,7 @@ public class MovementService implements IMovementService {
         Supplier  existingSupplier = supplierRepository.findById(supplierId).orElseThrow(() -> new RuntimeException("supplier not found"));
 
         InventoryMovement movement = new  InventoryMovement();
-        movement.setProductss(existingProduct);
+        movement.setProduct(existingProduct);
         movement.setWarehouse(existingWarehouse);
         movement.setSupplier(existingSupplier);
         movement.setQuantity(requestDTO.getQuantity());
@@ -56,21 +58,65 @@ public class MovementService implements IMovementService {
 
     @Override
     public List<ResponseMovementDTO> findAllMovement() {
-        return List.of();
+        List<InventoryMovement> movement = movementRepository.findAll();
+        List<ResponseMovementDTO> response =  new ArrayList<>();
+
+        for(InventoryMovement invMov : movement) {
+            ResponseMovementDTO dto = new  ResponseMovementDTO(
+                    invMov.getId(),
+                    invMov.getProduct().getId(),
+                    invMov.getWarehouse().getId(),
+                    invMov.getUser().getId(),
+                    invMov.getSupplier().getId(),
+                    invMov.getQuantity(),
+                    invMov.getCreationDate(),
+                    invMov.getTypeMovement()
+            );
+
+        }
+        return movement.stream().map(inventoryMovementMapper::toDTO).toList();
     }
 
     @Override
     public ResponseMovementDTO findMovementById(Long id) {
-        return null;
+        InventoryMovement movement = movementRepository.findById(id).orElseThrow(() -> new RuntimeException("movement not found"));
+        ResponseMovementDTO dto = new  ResponseMovementDTO(
+                movement.getId(),
+                movement.getProduct().getId(),
+                movement.getWarehouse().getId(),
+                movement.getUser().getId(),
+                movement.getSupplier().getId(),
+                movement.getQuantity(),
+                movement.getCreationDate(),
+                movement.getTypeMovement()
+        );
+        return dto;
     }
 
     @Override
     public ResponseMovementDTO updateMovement(Long id, UpdateMovementDTO requestDTO) {
-        return null;
+        InventoryMovement movement =  movementRepository.findById(id).orElseThrow(() -> new RuntimeException("movement not found"));
+        movement.setQuantity(requestDTO.getQuantity());
+        movement.setTypeMovement(requestDTO.getTypeMovement());
+
+        InventoryMovement savedMovement = movementRepository.save(movement);
+
+
+
+        return new   ResponseMovementDTO(
+                savedMovement.getId(),
+                savedMovement.getProduct().getId(),
+                savedMovement.getWarehouse().getId(),
+                savedMovement.getUser().getId(),
+                savedMovement.getSupplier().getId(),
+                savedMovement.getQuantity(),
+                savedMovement.getCreationDate(),
+                savedMovement.getTypeMovement()
+        );
     }
 
     @Override
     public void deleteMovement(Long id) {
-
+        movementRepository.deleteById(id);
     }
 }

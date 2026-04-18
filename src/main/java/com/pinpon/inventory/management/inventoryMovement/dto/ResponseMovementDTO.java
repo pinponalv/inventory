@@ -13,6 +13,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class ResponseMovementDTO {
+    private Long id;
     private Long productId;
     private Long warehouseId;
     private Long userId;

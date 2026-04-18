@@ -11,10 +11,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UpdateMovementDTO {
-    private Long productId;
+    /*
+    *
+    *
+    * private Long productId;
     private Long warehouseId;
     private Long userId;
     private Long supplierId;
+    *
+    * */
     private int quantity;
     private TypeMovement typeMovement;
 }

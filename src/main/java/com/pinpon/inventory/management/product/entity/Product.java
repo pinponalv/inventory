@@ -39,7 +39,7 @@ public class Product {
     @OneToMany (mappedBy = "products")
     private List<PurchaseOrder> purchaseOrder;
 
-    @OneToMany (mappedBy = "productss")
+    @OneToMany (mappedBy = "product")
     private List<InventoryMovement> inventoryMovements;
 
 }

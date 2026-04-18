@@ -26,7 +26,7 @@ public class InventoryMovement {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    private Product productss;
+    private Product product;
 
     @ManyToOne
     @JoinColumn(name = "almacen_id")
